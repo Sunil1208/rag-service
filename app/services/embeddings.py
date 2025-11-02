@@ -2,6 +2,7 @@ from sentence_transformers import SentenceTransformer
 from app.core.logger import get_logger
 
 logger = get_logger()
+_model_instance = None # Singleton instance
 
 class EmbeddingGenerator:
     """
@@ -11,9 +12,14 @@ class EmbeddingGenerator:
     """
 
     def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
-        logger.info(f"Loading embedding model: {model_name}")
-        self.model = SentenceTransformer(model_name)
+        global _model_instance
+        if _model_instance is None:
+            logger.info(f"Loading embedding model: {model_name}")
+            _model_instance = SentenceTransformer(model_name)
+        self.model = _model_instance
         self.model_name = model_name
+
+        
 
     def generate(self, text: str) -> list[float]:
         """

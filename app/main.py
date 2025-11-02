@@ -3,8 +3,12 @@ from fastapi import FastAPI
 from app.core.config import settings
 from app.core.db import Base, engine
 from app.core.logger import get_logger
-from app.api import ingest
-from app.api import query
+from app.api import (
+    ingest,
+    query,
+    qa,
+    completeness
+)
 
 logger = get_logger()
 
@@ -32,3 +36,5 @@ def health_check():
 # INGESTION ROUTES
 app.include_router(ingest.router)
 app.include_router(query.router)    
+app.include_router(qa.router)
+app.include_router(completeness.router)
