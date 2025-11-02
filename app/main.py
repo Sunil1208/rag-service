@@ -4,6 +4,7 @@ from app.core.config import settings
 from app.core.db import Base, engine
 from app.core.logger import get_logger
 from app.api import ingest
+from app.api import query
 
 logger = get_logger()
 
@@ -30,3 +31,4 @@ def health_check():
 
 # INGESTION ROUTES
 app.include_router(ingest.router)
+app.include_router(query.router)    
