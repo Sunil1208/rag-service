@@ -17,7 +17,7 @@ logger = get_logger()
 UPLOAD_DIR = "data/raw_uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-embedding_generator = EmbeddingGenerator()
+embedder = EmbeddingGenerator()
 vector_store = VectorStore()
 
 @router.post("/ingest")
@@ -50,7 +50,7 @@ async def ingest_file(file: UploadFile = File(...)):
 
     # Generate embeddings and store
     ids = [f"{unique_doc_id}_{i}" for i in range(len(chunks))]
-    embeddings = [embedding_generator.generate(chunk) for chunk in chunks]
+    embeddings = embedder.generate_batch(chunks)
     logger.info(f"Embeddings generated for {file.filename}")
     metadata = [{"document_id": unique_doc_id, "filename": file.filename} for _ in chunks]
 
