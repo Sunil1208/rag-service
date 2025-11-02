@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from app.core.config import settings
 from app.core.db import Base, engine
 from app.core.logger import get_logger
+from app.api import ingest
 
 logger = get_logger()
 
@@ -13,6 +14,7 @@ app = FastAPI(
 )
 
 # Create DB tables automatically on startup (temporary for development)
+Base.metadata.create_all(bind=engine)
 
 @app.on_event("startup")
 def startup_event():
@@ -25,3 +27,6 @@ def health_check():
     Health check endpoint to verify that the service is running.`
     """
     return {"status": "ok", "message": f"{settings.PROJECT_NAME} is running."}
+
+# INGESTION ROUTES
+app.include_router(ingest.router)
