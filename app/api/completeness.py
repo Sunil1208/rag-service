@@ -36,9 +36,9 @@ def check_completeness(document_id: str = Body(..., embed=True), topics: list[st
             
         coverage = (len(results["covered"]) / len(topics)) * 100 if topics else 0.0
         
-        return {
-            "document_id": document_id,
-            "covered": results["covered"],
-            "missing": results["missing"],
-            "coverage": round(coverage, 2)
-        }
+    return {
+        "document_id": document_id,
+        "covered": results["covered"],
+        "missing": results["missing"],
+        "coverage": round(coverage, 2)
+    }
