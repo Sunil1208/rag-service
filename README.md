@@ -205,7 +205,9 @@ Response
 |----------------|--------------------|
 | Local models → limited fluency | Integrate OpenAI GPT-4o-mini or Claude |
 | Synchronous ingestion | Async Celery / Redis pipeline |
-
+| Memory read for files | Switch to streaming hash + save |
+| Limited tests | Add pytest + HTTPX API tests |
+| Backend-only | Add Streamlit/React demo UI |
 
 ## Tech Stack
 
