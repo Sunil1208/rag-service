@@ -1,4 +1,4 @@
-# 🧠 RAG Service  
+# RAG Service  
 **AI-Powered Knowledge Base Search & Enrichment (Wand AI Challenge)**  
 
 ---
